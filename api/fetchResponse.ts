@@ -49,8 +49,7 @@ async function createEmbedding(query: string) {
 }
 
 // Function to fetch query result from Pinecone
-export async function fetchResult() {
-    const query = "what is the non disclosure agreement"; // Your query
+export async function fetchResult(query: string) {
     const embedding = await createEmbedding(query);
     // console.log("Embedding: ", embedding); // Log the generated embedding
 
@@ -61,7 +60,7 @@ export async function fetchResult() {
     try {
         const results = await pinecone.index(indexName).query({
             vector: embedding,
-            topK: 5,
+            topK: 2,
             includeMetadata: true
         });
 
@@ -84,5 +83,3 @@ export async function fetchResult() {
         return ['Error querying Pinecone.'];
     }
 }
-
-fetchResult();

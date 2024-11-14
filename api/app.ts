@@ -79,7 +79,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
         const textChunks = splitTextIntoChunks(cleanedText, CHUNK_SIZE);
 
         // Process the embeddings for each chunk
-        const embeddingsPromises = textChunks.map(chunk => embed(chunk)); // Assuming embed is async
+        const embeddingsPromises = textChunks.map(chunk => embed(chunk, text)); // Assuming embed is async and takes text as a second parameter
 
         const vectorsArray = await Promise.all(embeddingsPromises);
 

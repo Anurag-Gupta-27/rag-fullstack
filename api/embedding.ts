@@ -39,7 +39,7 @@ async function checkOrCreateIndex(pinecone: PineconeType, indexName: string, dim
     }
 }
 
-export async function embed(text: string) {
+export async function embed(text: string, query: string) {
     if (!text || text.trim().length === 0) {
         console.error("Text is required.");
         throw new Error("Text is required.");
@@ -86,7 +86,7 @@ export async function embed(text: string) {
         // console.log("Embedding successfully stored in Pinecone.");
         // return responseBody.embedding;
 
-        const relevantData = await fetchResult();
+        const relevantData = await fetchResult(query);
         console.log("Fetched relevant data: ", relevantData);
         return relevantData;
 
